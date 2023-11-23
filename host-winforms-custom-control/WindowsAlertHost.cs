@@ -39,7 +39,7 @@ namespace host_winforms_custom_control
         {
             if (d is WindowsAlertHost host && host.Child is AlertViewer viewer)
             {
-                viewer.Opacity = (float)e.NewValue;
+                viewer.AlertOpacity = (float)e.NewValue;
             }
         }
 

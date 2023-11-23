@@ -6,14 +6,6 @@
         xmlns:local="clr-namespace:host_winforms_custom_control"
         mc:Ignorable="d"
         Title="MainWindow" Width="500" Height="300" Background="RoyalBlue">
-    <Window.Resources>
-        <Style TargetType="{x:Type local:WindowsAlertHost}">
-            <Setter Property="FontFamily" Value="Audiowide" />
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="AlertOpacity" Value="1" />
-            <Setter Property="Step" Value="0.01" />
-        </Style>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -23,7 +15,16 @@
         <Grid 
             Grid.Row="1"
             Background="Azure">
-            <local:WindowsAlertHost x:Name="AlertHost" Margin="10" />
+            <WindowsFormsHost 
+                x:Name="AlertHost"
+                FontFamily="Audiowide"
+                FontSize="24"
+                Margin="10" >
+                <local:AlertViewer
+                    x:Name="AlertViewer"
+                    Step="0.01"
+                    AlertOpacity="1.0"/>
+            </WindowsFormsHost>
         </Grid>
     </Grid>
 </Window>

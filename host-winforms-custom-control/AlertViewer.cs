@@ -32,19 +32,19 @@ namespace host_winforms_custom_control
             FadeForm.Font = Font;
         }
         FadeForm FadeForm { get; } = new FadeForm();
-        public float Opacity
+        public double AlertOpacity
         {
             get => Convert.ToSingle(FadeForm.AlertOpacity);
             set
             {
-                if (!Equals(FadeForm.Opacity, value))
+                if (!Equals(FadeForm.AlertOpacity, value))
                 {
-                    FadeForm.Opacity = value;
+                    FadeForm.AlertOpacity = value;
                 }
             }
         }
 
-        public float Step
+        public double Step
         {
             get => Convert.ToSingle(FadeForm.Step);
             set
