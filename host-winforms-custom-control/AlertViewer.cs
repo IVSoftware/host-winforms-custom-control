@@ -22,19 +22,14 @@ namespace host_winforms_custom_control
             InitializeComponent();
             Disposed += (sender, e) =>FadeForm.Dispose();
         }
-        protected override void OnPaint(PaintEventArgs e)
+        public void DisplayAlert(string alert="Alert")
         {
-            base.OnPaint(e);
+            FadeForm.ShowAlert(this, alert);
         }
         protected override void OnFontChanged(EventArgs e)
         {
             base.OnFontChanged(e);
             FadeForm.Font = Font;
-        }
-        protected override void OnCreateControl()
-        {
-            base.OnCreateControl();
-            FadeForm.Show(this.Parent);
         }
         FadeForm FadeForm { get; } = new FadeForm();
         public float Opacity
@@ -69,30 +64,34 @@ namespace host_winforms_custom_control
         {
             BackColor = Color.DarkGray;
             FormBorderStyle = FormBorderStyle.None;
-            Controls.Add(new Label
+            _alertLabel = new Label
             {
                 Name = "labelAlert",
                 Margin = new Padding(20),
                 BackColor = Color.LightBlue,
                 Dock = DockStyle.Fill,
-                Text = "This is an Alert!",
-                TextAlign = ContentAlignment.MiddleCenter
-            });
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            Controls.Add(_alertLabel);
         }
+        readonly Label _alertLabel;
         public TimeSpan AnimationTimeSpan { get; set; } = TimeSpan.FromSeconds(2);
-        public new async void Show(IWin32Window owner)
+        public async void ShowAlert(IWin32Window owner, string msg)
         {
             if (!DesignMode)
             {
-                base.Show(owner);
                 if (owner is Control parent)
                 {
+                    localTrackParent();
+                    base.Show(owner);
+                    _alertLabel.Text = msg;
                     // Animate
                     for (double d = 0; d <= AlertOpacity; d += Step)
                     {
                         localTrackParent();
                         base.Opacity = Math.Pow(d, 2);
                         await Task.Delay(TimeSpan.FromSeconds(0.01));
+                        localTrackParent();
                         if (!Visible) break; // If form hides during animation.
                     }
 

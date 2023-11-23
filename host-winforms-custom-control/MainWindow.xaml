@@ -23,7 +23,7 @@
         <Grid 
             Grid.Row="1"
             Background="Azure">
-            <local:WindowsAlertHost Margin="10" />
+            <local:WindowsAlertHost x:Name="AlertHost" Margin="10" />
         </Grid>
     </Grid>
 </Window>

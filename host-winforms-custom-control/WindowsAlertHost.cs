@@ -7,6 +7,9 @@ namespace host_winforms_custom_control
     {
         public WindowsAlertHost() => Child = new AlertViewer();
 
+        public static implicit operator AlertViewer(WindowsAlertHost host) =>
+            (AlertViewer)host.Child;
+
         public static readonly DependencyProperty AlertOpacityProperty =
             DependencyProperty.Register(
                 "AlertOpacity",
