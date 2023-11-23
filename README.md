@@ -5,8 +5,8 @@ As I understand it, you're using a third party `AlertViewer` and let's say it ex
 ```
 public class AlertViewer
 {
-    float Opacity { get; set; }
-    float Step { get; set; }
+    double AlertOpacity { get; set; }
+    double Step { get; set; }
 }
 ```
 
@@ -109,6 +109,43 @@ public class WindowsAlertHost : WindowsFormsHost
 ```
 ___
 
+##### ALTERNATIVE
+
+Your question, and my answer, are about how to **define a style** which implies that there are several of the same kind of control in use and the look and behavior of all of them should be the same. I'd be remiss if I didn't mention that setting properties directly with text or a StaticResource is much simpler.
+###### Direct set properties on hosted object
+
+```
+<Window x:Class="host_winforms_custom_control.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:host_winforms_custom_control"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="500" Height="300" Background="RoyalBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid 
+            Grid.Row="1"
+            Background="Azure">
+            <WindowsFormsHost 
+                x:Name="AlertHost"
+                FontFamily="Audiowide"
+                FontSize="24"
+                Margin="10" >
+                <local:AlertViewer
+                    x:Name="AlertViewer"
+                    Step="0.01"
+                    AlertOpacity="1.0"/>
+            </WindowsFormsHost>
+        </Grid>
+    </Grid>
+</Window>
+```
 
 
   [1]: https://i.stack.imgur.com/IJ1JX.png
