@@ -111,7 +111,7 @@ ___
 
 ##### ALTERNATIVE
 
-Your question, and my answer, are about how to **define a style** which implies that there are several of the same kind of control in use, and that the look and behavior of all of them should consistent. I'd be remiss if I didn't mention that setting properties directly with text or a StaticResource is much simpler.
+Your question, and my answer, are about how to **define a style** which implies that there are several of the same kind of control in use, and that the look and behavior of all of them should be consistent. I'd be remiss if I didn't mention that setting properties _directly_ with text or a `StaticResource` is much simpler.
 ###### Direct set properties on hosted object
 
 ```
